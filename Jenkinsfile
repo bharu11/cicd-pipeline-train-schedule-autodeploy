@@ -13,6 +13,7 @@ pipeline {
                 sh 'git branch'
                 echo 'GIT BRANCH END'
                 sh 'git checkout master'
+                sh 'git branch'
                
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
