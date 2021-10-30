@@ -8,13 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                echo 'GIT BRANCH START'
-                sh 'git branch'
-                echo 'GIT BRANCH END'
-                sh 'git checkout master'
-                sh 'git branch'
-               
+                sh './gradlew build --no-daemon' 
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
@@ -33,7 +27,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch pattern: ".*", comparator: "REGEXP"
             }
             steps {
                 script {
